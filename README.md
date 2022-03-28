@@ -24,3 +24,6 @@ Clone `.env-sample` to `.env` and update value for following environment variabl
 | -------------------- | -------------- | ------------------------- |
 | `PORT`               | 3000           | Application port name     |
 
+## curl example
+curl -X GET http://127.0.0.1:4001/api/v1/assets/hello
+

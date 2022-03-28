@@ -5,6 +5,8 @@ import { HealthModule } from './modules/health/health.module';
 import { AssetModule } from './modules/asset/asset.module';
 import { HttpErrorFilter } from './common/http-error.filter';
 import { LoggingInterceptor } from './common/logging.interceptor';
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { LoggingInterceptor } from './common/logging.interceptor';
     }),
     HealthModule,
     AssetModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [
