@@ -1,0 +1,91 @@
+openapi: 3.0.2
+info:
+  title: BC API
+  description: BC API Service
+  termsOfService: 
+  contact:
+    email: 
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 1.0.0
+externalDocs:
+  description: 
+  url: 
+servers:
+  - url: /api/v1
+tags:
+  - name: assets
+    description: APIs to manage assets
+paths:
+  /assets/hello:
+    get:
+      security:
+        - bearerToken: []
+      summary: hello 
+      description: Get hello.
+      operationId: getHello
+      parameters: []
+      responses:
+        '200':
+          description: It indicates that the request has succeeded and returns all the asset information.
+          content:
+            application/json:
+            schema:
+              type: string
+  /assets: 
+    get:
+      security:
+        - bearerToken: []
+      summary: List all assets 
+      description: Get all the assets in the blockchain.
+      operationId: getAllAssets
+      tags:
+        - assets
+      parameters: []
+      responses:
+        '200':
+          description: It indicates that the request has succeeded and returns all the asset information.
+          content:
+            application/json:
+              schema:
+                type: 'string'
+        '401':
+          description : no connector setting/mspRef present in header,or wrong connector key/mspRef
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: The server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearerToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+  schemas:
+      type: object
+      required:
+        - code
+        - message
+        - timestamp
+        - path
+        - method
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        timestamp:
+          type: string
+        path:
+          type: string
+        method:
+          type: string
