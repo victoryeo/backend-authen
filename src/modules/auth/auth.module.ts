@@ -1,16 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
+import { Module } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { UsersModule } from '../users/users.module';
+import { PassportModule } from '@nestjs/passport';
+import { LocalStrategy } from './local.strategy';
 
-@Injectable()
-export class AuthService {
-  constructor(private usersService: UsersService) {}
-
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOne(username);
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
-    }
-    return null;
-  }
-}
+@Module({
+  imports: [UsersModule, PassportModule],
+  providers: [AuthService, LocalStrategy],
+})
+export class AuthModule {}
