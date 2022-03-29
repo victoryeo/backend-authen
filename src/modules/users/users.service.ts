@@ -8,7 +8,7 @@ import { UserLoginResourceModel } from '../../dtos/userLoginResourceModel';
 import { comparePasswords } from '../../common/mapper';
 
 // This should be a real class/interface representing a user entity
-export type User = any;
+//export type User = any;
 
 @Injectable()
 export class UsersService {
@@ -17,7 +17,7 @@ export class UsersService {
     private userSettingRepository: Repository<UserSettingEntity>
   ) {}
 
-  private readonly users = [
+  /*private readonly users = [
     {
       userId: 1,
       username: 'john',
@@ -28,7 +28,7 @@ export class UsersService {
       username: 'maria',
       password: 'guess',
     },
-  ];
+  ];*/
 
   /*async findOne(username: string): Promise<User | undefined> {
     return this.users.find(user => user.username === username);
