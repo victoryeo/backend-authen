@@ -1,10 +1,9 @@
-import { Entity, Column, Generated, CreateDateColumn } from 'typeorm';
+import { Entity, Column, BeforeInsert, CreateDateColumn } from 'typeorm';
+import bcrypt from 'bcrypt';
 import { BaseEntity } from './base.entity';
 
-@Entity('aureussetting')
+@Entity('usersetting')
 export class UserSettingEntity extends BaseEntity {
-  @Column({ nullable: true })
-  type: string;
 
   @Column()
   username: string;
@@ -12,9 +11,7 @@ export class UserSettingEntity extends BaseEntity {
   @Column()
   password: string;
 
-  @Column()
-  createdTime: Date;
-
-  @Column({ nullable: true })
-  updatedTime: Date;
+  @BeforeInsert()  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10);  
+  }
 }

@@ -28,4 +28,12 @@ Clone `.env-sample` to `.env` and update value for following environment variabl
 curl -X GET http://127.0.0.1:4001/api/v1/assets/hello  
 curl -X POST http://localhost:4001/api/v1/login -d '{"username": "john", "password": "changeme"}' -H "Content-Type: application/json"  
 curl http://localhost:4001/api/v1/profile -H "Authorization: Bearer <token>"  
+curl -X POST http://localhost:4001/api/v1/register -d '{"username": "john", "password": "changeme"}' -H "Content-Type: application/json"  
 
+## postgresql
+Use this sql command to create usersetting table:
+CREATE TABLE usersetting(
+   id serial PRIMARY KEY,
+   username VARCHAR (255)  UNIQUE NOT NULL,
+   password VARCHAR (255)  NOT NULL
+);
