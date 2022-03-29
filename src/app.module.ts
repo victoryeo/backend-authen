@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { HealthModule } from './modules/health/health.module';
 import { AssetModule } from './modules/asset/asset.module';
 import { HttpErrorFilter } from './common/http-error.filter';
@@ -11,6 +12,7 @@ import { RootModule } from './modules/root/root.module';
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot(),
     ConfigModule.forRoot({
       expandVariables: true,
     }),
