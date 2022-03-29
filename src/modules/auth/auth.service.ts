@@ -10,6 +10,8 @@ import { JwtPayload } from '../../dtos/jwtPayload';
 
 @Injectable()
 export class AuthService {
+  JWT_EXPIRE: number  = 600;
+  
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService
@@ -60,7 +62,7 @@ export class AuthService {
     const user: JwtPayload = { username };    
     const accessToken = this.jwtService.sign(user);    
     return {
-        expiresIn: 600,
+        expiresIn: this.JWT_EXPIRE,
         accessToken,    
     };  
   }
