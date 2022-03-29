@@ -5,6 +5,7 @@ import { UserSettingEntity } from '../../entities/usersetting.entity';
 import { UserSettingResourceModel } from '../../dtos/userSettingResourceModel';
 import { toUserDto } from '../../common/mapper';
 import { UserLoginResourceModel } from '../../dtos/userLoginResourceModel';
+import { comparePasswords } from '../../common/mapper';
 
 // This should be a real class/interface representing a user entity
 export type User = any;
@@ -29,8 +30,40 @@ export class UsersService {
     },
   ];
 
-  async findOne(username: string): Promise<User | undefined> {
+  /*async findOne(username: string): Promise<User | undefined> {
     return this.users.find(user => user.username === username);
+  }*/
+
+  async findOne(options?: object): Promise<UserSettingResourceModel> {
+    Logger.log(`findOne ${JSON.stringify(options)}`) 
+    const user =  await this.userSettingRepository.findOne(options);
+    Logger.log(`findOne ${user}`)  
+    return toUserDto(user);  
+  }
+
+  async findByLogin({ username, password }: UserLoginResourceModel): Promise<UserSettingResourceModel> {  
+    Logger.log(`findByLogin ${username}`) 
+    const user = await this.userSettingRepository.findOne({ where: { username } });
+    
+    if (!user) {
+        throw ('User not found');    
+    }
+    
+    // compare passwords    
+    const areEqual = await comparePasswords(user.password, password);
+    
+    if (!areEqual) {
+        throw ('Invalid credentials');    
+    }
+    
+    return toUserDto(user);  
+  }
+
+  async findByPayload({ username }: any): Promise<UserSettingResourceModel> {
+    Logger.log(`findByPayload ${username}`) 
+    return await this.findOne({ 
+        where:  { username } 
+      });  
   }
 
   async create(userDto: UserLoginResourceModel): Promise<UserSettingResourceModel> {    

@@ -12,26 +12,5 @@ export class RootService {
     private userSettingRepository: Repository<UserSettingEntity>
   ) {}
 
-  async findOne(options?: object): Promise<UserSettingResourceModel> {
-    const user =  await this.userSettingRepository.findOne(options);
-    return toUserDto(user);  
-  }
-
-  async findByLogin({ username, password }: UserSettingEntity): Promise<UserSettingResourceModel> {    
-    const user = await this.userSettingRepository.findOne({ where: { username } });
-    
-    if (!user) {
-        throw ('User not found');    
-    }
-    
-    // compare passwords
-    const areEqual = (user.password === password)
-
-    if (!areEqual) {
-        throw ('Invalid credentials');    
-    }
-    
-    return toUserDto(user);  
-  }
 
 }

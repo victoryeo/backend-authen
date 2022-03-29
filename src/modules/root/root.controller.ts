@@ -4,6 +4,7 @@ import { LocalAuthGuard } from '../auth/local-auth.guard';
 import { AuthService } from '../auth/auth.service';
 import { RegistrationStatus } from '../../dtos/registrationStatus';
 import { UserLoginResourceModel } from '../../dtos/userLoginResourceModel';
+import { LoginStatus } from '../../dtos/loginStatus';
 
 @Controller('')
 export class RootController {
@@ -19,10 +20,16 @@ export class RootController {
     return result;  
   }
 
-  @UseGuards(LocalAuthGuard)
+  /*@UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req) {
     return this.authService.login(req.user);
+  }*/
+
+  @UseGuards(LocalAuthGuard)
+  @Post('login')  
+  async login(@Body() req: UserLoginResourceModel): Promise<LoginStatus> {
+      return await this.authService.login(req);  
   }
 
   @UseGuards(JwtAuthGuard)
