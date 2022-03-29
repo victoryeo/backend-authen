@@ -59,7 +59,7 @@ export class UsersService {
     return toUserDto(user);  
   }
 
-  async findByPayload({ username }: any): Promise<UserSettingResourceModel> {
+  async findByPayload(username : any): Promise<UserSettingResourceModel> {
     Logger.log(`findByPayload ${username}`) 
     return await this.findOne({ 
         where:  { username } 
