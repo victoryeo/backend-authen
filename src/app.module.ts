@@ -7,7 +7,7 @@ import { HttpErrorFilter } from './common/http-error.filter';
 import { LoggingInterceptor } from './common/logging.interceptor';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
-import { AppController } from './app.controller';
+import { RootModule } from './modules/root/root.module';
 
 @Module({
   imports: [
@@ -18,8 +18,9 @@ import { AppController } from './app.controller';
     AssetModule,
     AuthModule,
     UsersModule,
+    RootModule
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [
     {
       provide: APP_FILTER,
