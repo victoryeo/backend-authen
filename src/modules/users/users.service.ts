@@ -61,9 +61,13 @@ export class UsersService {
 
   async findByPayload(username : any): Promise<UserSettingResourceModel> {
     Logger.log(`findByPayload ${username}`) 
-    return await this.findOne({ 
-        where:  { username } 
-      });  
+    try {
+      return await this.findOne({ 
+          where:  { username } 
+        });  
+    } catch (err) {
+      throw "username not found"
+    }
   }
 
   async create(userDto: UserLoginResourceModel): Promise<UserSettingResourceModel> {    
