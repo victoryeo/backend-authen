@@ -33,10 +33,12 @@ curl -X GET http://localhost:4001/api/v1/profile -H "Authorization: Bearer <toke
 curl -X POST http://localhost:4001/api/v1/register -d '{"username": "john", "password": "changeme"}' -H "Content-Type: application/json"  
 
 ## postgresql
-create a database called bond-tokenization:  
-CREATE DATABASE bond-tokenization;
+Create a database called bond-tokenization:  
+CREATE DATABASE bond-tokenization;  
     
-Use this sql command to create usersetting table:  
+After that, in postgres prompt, do: \c bond-tokenization  
+
+And use this sql command to create usersetting table:  
 CREATE TABLE usersetting(  
    id serial PRIMARY KEY,  
    username VARCHAR (255)  UNIQUE NOT NULL,  
