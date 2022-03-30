@@ -34,7 +34,8 @@ curl -X POST http://localhost:4001/api/v1/register -d '{"username": "john", "pas
 
 ## postgresql
 create a database called bond-tokenization:  
-CREATE DATABASE bond-tokenization;  
+CREATE DATABASE bond-tokenization;
+    
 Use this sql command to create usersetting table:  
 CREATE TABLE usersetting(  
    id serial PRIMARY KEY,  
