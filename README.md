@@ -28,7 +28,7 @@ and update the postgres username and password.
 
 ## curl example
 curl -X GET http://127.0.0.1:4001/api/v1/assets/hello  
-curl -X POST http://localhost:4001/api/v1/register -d '{"username": "john", "password": "changeme"}' -H "Content-Type: application/json" 
+curl -X POST http://localhost:4001/api/v1/register -d '{"username": "john", "password": "changeme"}' -H "Content-Type: application/json"  
 curl -X POST http://localhost:4001/api/v1/login -d '{"username": "john", "password": "changeme"}' -H "Content-Type: application/json"  
 curl -X GET http://localhost:4001/api/v1/profile -H "Authorization: Bearer <token>"  
  
